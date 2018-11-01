@@ -1,0 +1,24 @@
+php:
+    version: 7.1
+    interpretor:
+        name: fpm
+        options:
+            extensions:
+                - php-mysqlnd
+                - php-opcache
+                - php-pdo
+                - php-dom
+                - php-xml
+                - php-curl
+                - php-zip
+                - php-mcrypt
+                - php-mbstring
+    composer: true
+    frontend:
+        name: nginx
+        options:
+            vhost_file: vhost.conf
+hooks:
+  build:
+    - cp .env.production .env
+    - php artisan migrate --force
